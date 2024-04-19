@@ -1,7 +1,7 @@
 // Login.js
-
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState } from "react";
+import "./Login.css";
+import backgroundVideo from "./Media2.mp4";
 
 function Login({ onAdminLogin, adminCredentials, onInputChange }) {
   const [errorMessages, setErrorMessages] = useState({});
@@ -9,14 +9,14 @@ function Login({ onAdminLogin, adminCredentials, onInputChange }) {
 
   const database = [
     {
-      username: 'organix',
-      password: 'organix123',
+      username: "organix",
+      password: "organix123",
     },
   ];
 
   const errors = {
-    uname: 'invalid username',
-    pass: 'invalid password',
+    uname: "invalid username",
+    pass: "invalid password",
   };
 
   const handleSubmit = (event) => {
@@ -27,15 +27,15 @@ function Login({ onAdminLogin, adminCredentials, onInputChange }) {
     );
 
     if (userData) {
-      console.log("userData ", userData)
+      console.log("userData ", userData);
       if (userData.password !== adminCredentials.password) {
-        setErrorMessages({ name: 'pass', message: errors.pass });
+        setErrorMessages({ name: "pass", message: errors.pass });
       } else {
         setIsSubmitted(true);
         onAdminLogin();
       }
     } else {
-      setErrorMessages({ name: 'uname', message: errors.uname });
+      setErrorMessages({ name: "uname", message: errors.uname });
     }
   };
 
@@ -48,26 +48,26 @@ function Login({ onAdminLogin, adminCredentials, onInputChange }) {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label className="left">Username </label>
           <input
             type="text"
+            placeholder="username"
             name="username"
             value={adminCredentials.username}
             onChange={onInputChange}
             required
           />
-          {renderErrorMessage('uname')}
+          {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
-          <label className="left">Password </label>
           <input
             type="password"
+            placeholder="password"
             name="password"
             value={adminCredentials.password}
             onChange={onInputChange}
             required
           />
-          {renderErrorMessage('pass')}
+          {renderErrorMessage("pass")}
         </div>
         <div className="button-container">
           <input type="submit" />
@@ -78,13 +78,13 @@ function Login({ onAdminLogin, adminCredentials, onInputChange }) {
 
   return (
     <div className="app">
+      <video autoPlay loop muted className="background-video">
+        <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isSubmitted ? (
-          <div>User is successfully logged in</div>
-        ) : (
-          renderForm
-        )}
+        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
       </div>
     </div>
   );
